@@ -1,0 +1,116 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --font-family: inherit;
+}
+
+button {
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: var(--primary-color);
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input[type='text'] {
+  padding: 10px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+main {
+  background-color: #f0f0f0;
+  display: flex;
+  padding: 50px 100px 60px 100px; /* top right bottom left */
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+}
+
+.flex-1 {
+  flex: 1;
+  margin-right: 16px;
+}
+
+.max-w-md {
+  max-width: 50%;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.cv-preview-card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.CVPreview-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10mm;
+  background-color: rgb(255, 255, 255);
+  color: rgb(49, 61, 93);
+  max-width: 100%;
+}
+
+.CVPreview-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.CVPreview-field {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+}
+
+.CVPreview-field p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.education-form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.education-form-container p {
+  margin: 0;
+  flex-basis: 100%;
+}
+
+.education-form-container strong {
+  margin-right: 4px;
+}
