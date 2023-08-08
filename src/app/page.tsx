@@ -83,7 +83,7 @@ const Page: React.FC = () => {
 
   return (
     <main className="flex min-h-screen p-24">
-      <div className="flex-1">
+      <div className="input-container flex-1 overflow-y-auto" style={{ height: '100vh' }}>
         <div className="max-w-md">
           <h2 className="mb-4 text-2xl font-semibold" style={{ marginTop: 0, textAlign: 'center' }}>Resume</h2>
           <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>Personal Information</p>
@@ -139,18 +139,19 @@ const Page: React.FC = () => {
               </p>
             </div>
             {isSkillsFormVisible && (
-              <Skills onAddSkill={(skill) => setSkills(prevSkills => [...prevSkills, skill])} />
+              <Skills onAddSkill={(skill) => setSkills(prevSkills => [...prevSkills, skill])}
+              />
             )}
             <button
               type="submit"
               className="button-save" style={{ textAlign: 'center' }}
             >
-              Save
+              Download
             </button>
           </form>
         </div>
       </div>
-      <div className="flex-1 ml-8">
+      <div className="cv-preview-container flex-1 ml-8 overflow-y-auto" style={{ height: '100vh' }}>
         <Card className="bg-white rounded shadow">
           <div className="CVPreview-container">
             <CVPreview

@@ -1,6 +1,6 @@
 :root {
   --primary-color: #007bff;
-  --secondary-color: #6c757d;
+  --secondary-color: #a4adb6;
   --font-family: inherit;
 }
 
@@ -29,7 +29,7 @@ input[type='text'] {
 main {
   background-color: #f0f0f0;
   display: flex;
-  padding: 50px 100px 60px 100px; /* top right bottom left */
+  padding: 50px 100px 60px 100px;
   min-height: 100vh;
 }
 
@@ -65,7 +65,6 @@ h2 {
 .CVPreview-container {
   display: flex;
   flex-direction: column;
-  padding: 0;
   background-color: rgb(255, 255, 255);
   color: rgb(49, 61, 93);
   max-width: 100%;
@@ -73,21 +72,21 @@ h2 {
 
 .CVPreview-sections {
   display: flex;
-  gap: 30px;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 10px;
+  gap: 20px;
+  justify-content: space-between;
 }
 
 .CVPreview-section {
-  flex: 1;
-  max-width: calc(50% - 10px);
+  flex-basis: calc(50% - 30px);
+  max-width: calc(50% - 30px);
+  align-self: flex-start;
 }
 
 .CVPreview-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
 }
 
@@ -98,4 +97,8 @@ h2 {
   white-space: normal;
   overflow-wrap: break-word;
   max-width: 100%;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
