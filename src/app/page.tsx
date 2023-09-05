@@ -5,7 +5,7 @@ import PersonalForm, { PersonalFormData } from '@/components/PersonalForm';
 import EducationForm from '@/components/EducationForm';
 import ExperienceForm from '@/components/ExperienceForm';
 import Skills from '@/components/Skills';
-import CVPreview from '@/components/CVPreview';
+import CVPreview from '@/components/cvPreview/CVPreview';
 import './globals.css';
 
 const Page: React.FC = () => {
