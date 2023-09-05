@@ -1,18 +1,7 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
-export interface PersonalFormData {
-  fullName: string;
-  jobTitle: string;
-  emailAddress: string;
-  phoneNumber: string;
-  address: string;
-  birthDate: Date | null;
-  nationality: string;
-  gender: string;
-  linkedIn: string;
-}
+import { PersonalFormData } from './types';
 
 interface PersonalFormProps {
   formData: PersonalFormData;
