@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
 interface SkillsProps {
+  skills: string[];
   onAddSkill: (skill: string) => void;
+  onRemoveSkill: (index: number) => void;
 }
 
-const Skills: React.FC<SkillsProps> = ({ onAddSkill }) => {
+const Skills: React.FC<SkillsProps> = ({ skills, onAddSkill, onRemoveSkill }) => {
   const [newSkill, setNewSkill] = useState('');
 
   const handleAddSkill = () => {
@@ -12,6 +14,10 @@ const Skills: React.FC<SkillsProps> = ({ onAddSkill }) => {
       onAddSkill(newSkill);
       setNewSkill('');
     }
+  };
+
+  const handleRemoveSkill = (index: number) => {
+    onRemoveSkill(index);
   };
 
   return (
@@ -25,6 +31,14 @@ const Skills: React.FC<SkillsProps> = ({ onAddSkill }) => {
         />
         <button onClick={handleAddSkill}>Add Skill</button>
       </div>
+      <ul>
+        {skills.map((skill, index) => (
+          <li key={index}>
+            {skill}
+            <button onClick={() => handleRemoveSkill(index)}>Remove</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

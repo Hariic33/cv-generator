@@ -139,7 +139,14 @@ const Page: React.FC = () => {
               </p>
             </div>
             {isSkillsFormVisible && (
-              <Skills onAddSkill={(skill) => setSkills(prevSkills => [...prevSkills, skill])}
+              <Skills
+                skills={skills}
+                onAddSkill={(skill) => setSkills((prevSkills) => [...prevSkills, skill])}
+                onRemoveSkill={(index) => {
+                  const updatedSkills = [...skills];
+                  updatedSkills.splice(index, 1);
+                  setSkills(updatedSkills);
+                }}
               />
             )}
             <button
