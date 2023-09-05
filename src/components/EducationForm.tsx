@@ -1,31 +1,15 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
-interface EducationFormData {
-  degree: string;
-  schoolName: string;
-  startDate: Date | null;
-  endDate: Date | null;
-  city: string;
-  country: string;
-}
+import { EducationFormData } from './types';
+import { initialEducationFormData } from './initialFormData';
 
 interface EducationFormProps {
   onInputChange: (name: string, value: string | Date | null) => void;
 }
 
 const EducationForm: React.FC<EducationFormProps> = ({ onInputChange }) => {
-  const initialFormData: EducationFormData = {
-    degree: '',
-    schoolName: '',
-    startDate: null,
-    endDate: null,
-    city: '',
-    country: '',
-  };
-
-  const [formData, setFormData] = useState<EducationFormData>(initialFormData);
+  const [formData, setFormData] = useState<EducationFormData>(initialEducationFormData);
 
   const handleInputChange = (name: string, value: string | Date | null) => {
     setFormData((prevData) => ({

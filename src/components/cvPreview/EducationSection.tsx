@@ -1,5 +1,5 @@
 import React from 'react';
-import { EducationFormData } from './types';
+import { EducationFormData } from '../types';
 
 interface EducationSectionProps {
     educationFormData: EducationFormData;

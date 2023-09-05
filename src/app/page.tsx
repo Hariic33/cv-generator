@@ -1,44 +1,22 @@
 'use client';
 import React, { useState } from 'react';
 import { Card } from 'antd';
-import PersonalForm, { PersonalFormData } from '@/components/PersonalForm';
+import PersonalForm from '@/components/PersonalForm';
 import EducationForm from '@/components/EducationForm';
 import ExperienceForm from '@/components/ExperienceForm';
 import Skills from '@/components/Skills';
 import CVPreview from '@/components/cvPreview/CVPreview';
 import './globals.css';
+import {
+  initialPersonalFormData,
+  initialEducationFormData,
+  initialExperienceFormData,
+} from '@/components/initialFormData';
 
 const Page: React.FC = () => {
-  const [personalFormData, setPersonalFormData] = useState<PersonalFormData>({
-    fullName: '',
-    jobTitle: '',
-    emailAddress: '',
-    phoneNumber: '',
-    address: '',
-    birthDate: null,
-    nationality: '',
-    gender: '',
-    linkedIn: '',
-  });
-
-  const [educationFormData, setEducationFormData] = useState({
-    degree: '',
-    schoolName: '',
-    startDate: null,
-    endDate: null,
-    city: '',
-    country: '',
-  });
-
-  const [experienceFormData, setExperienceFormData] = useState({
-    jobTitle: '',
-    employer: '',
-    city: '',
-    country: '',
-    startDate: null,
-    endDate: null,
-    description: '',
-  });
+  const [personalFormData, setPersonalFormData] = useState(initialPersonalFormData);
+  const [educationFormData, setEducationFormData] = useState(initialEducationFormData);
+  const [experienceFormData, setExperienceFormData] = useState(initialExperienceFormData);
 
   const [skills, setSkills] = useState<string[]>([]);
   const [isEducationFormVisible, setEducationFormVisible] = useState(false);
@@ -89,6 +67,7 @@ const Page: React.FC = () => {
           <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>Personal Information</p>
           <form onSubmit={handleSave}>
             <div className="mb-4">
+              {/* Personal Information Form */}
               <PersonalForm
                 formData={personalFormData}
                 onInputChange={handlePersonalFormInputChange}
@@ -97,6 +76,7 @@ const Page: React.FC = () => {
               />
             </div>
             <div className="flex mb-4">
+              {/* Education Section */}
               <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>
                 Education
                 <button
@@ -112,6 +92,7 @@ const Page: React.FC = () => {
               <EducationForm onInputChange={(name, value) => handleFormInputChange('education', name, value)} />
             )}
             <div className="flex mb-4">
+              {/* Experience Section */}
               <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>
                 Experience
                 <button
@@ -127,6 +108,7 @@ const Page: React.FC = () => {
               <ExperienceForm onInputChange={(name, value) => handleFormInputChange('experience', name, value)} />
             )}
             <div className="flex mb-4">
+              {/* Skills Section */}
               <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>
                 Skills
                 <button
@@ -161,6 +143,7 @@ const Page: React.FC = () => {
       <div className="cv-preview-container flex-1 ml-8 overflow-y-auto" style={{ height: '100vh' }}>
         <Card className="bg-white rounded shadow">
           <div className="CVPreview-container">
+            {/* CV Preview */}
             <CVPreview
               personalFormData={personalFormData}
               educationFormData={educationFormData}

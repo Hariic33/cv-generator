@@ -1,33 +1,15 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
-interface ExperienceFormData {
-  jobTitle: string;
-  employer: string;
-  city: string;
-  country: string;
-  startDate: Date | null;
-  endDate: Date | null;
-  description: string;
-}
+import { ExperienceFormData } from './types';
+import { initialExperienceFormData } from './initialFormData';
 
 interface ExperienceFormProps {
   onInputChange: (name: keyof ExperienceFormData, value: string | Date | null) => void;
 }
 
 const ExperienceForm: React.FC<ExperienceFormProps> = ({ onInputChange }) => {
-  const initialFormData: ExperienceFormData = {
-    jobTitle: '',
-    employer: '',
-    city: '',
-    country: '',
-    startDate: null,
-    endDate: null,
-    description: '',
-  };
-
-  const [formData, setFormData] = useState<ExperienceFormData>(initialFormData);
+  const [formData, setFormData] = useState<ExperienceFormData>(initialExperienceFormData);
 
   const handleInputChange = (name: keyof ExperienceFormData, value: string | Date | null) => {
     setFormData((prevData) => ({
