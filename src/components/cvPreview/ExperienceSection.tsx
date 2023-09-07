@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExperienceFormData } from '../types';
+import { ExperienceFormData } from '../data/types';
 
 interface ExperienceSectionProps {
   experienceFormData: ExperienceFormData;

@@ -1,17 +1,17 @@
 'use client';
 import React, { useState } from 'react';
 import { Card } from 'antd';
-import PersonalForm from '@/components/PersonalForm';
-import EducationForm from '@/components/EducationForm';
-import ExperienceForm from '@/components/ExperienceForm';
-import Skills from '@/components/Skills';
+import PersonalForm from '@/components/resume/PersonalForm';
+import EducationForm from '@/components/resume/EducationForm';
+import ExperienceForm from '@/components/resume/ExperienceForm';
+import Skills from '@/components/resume/Skills';
 import CVPreview from '@/components/cvPreview/CVPreview';
 import './globals.css';
 import {
   initialPersonalFormData,
   initialEducationFormData,
   initialExperienceFormData,
-} from '@/components/initialFormData';
+} from '@/components/data/initialFormData';
 
 const Page: React.FC = () => {
   const [personalFormData, setPersonalFormData] = useState(initialPersonalFormData);
@@ -61,13 +61,12 @@ const Page: React.FC = () => {
 
   return (
     <main className="flex min-h-screen p-24">
-      <div className="input-container flex-1 overflow-y-auto" style={{ height: '100vh' }}>
+      <div className="input-container flex-1 overflow-y-auto">
         <div className="max-w-md">
-          <h2 className="mb-4 text-2xl font-semibold" style={{ marginTop: 0, textAlign: 'center' }}>Resume</h2>
-          <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>Personal Information</p>
+          <h2 className="mb-4 text-2xl font-semibold center">Resume</h2>
+          <p className="text-xl font-semibold flex-1 form-header">Personal Information</p>
           <form onSubmit={handleSave}>
             <div className="mb-4">
-              {/* Personal Information Form */}
               <PersonalForm
                 formData={personalFormData}
                 onInputChange={handlePersonalFormInputChange}
@@ -76,8 +75,7 @@ const Page: React.FC = () => {
               />
             </div>
             <div className="flex mb-4">
-              {/* Education Section */}
-              <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>
+              <p className="text-xl font-semibold flex-1 form-header">
                 Education
                 <button
                   type="button"
@@ -92,8 +90,7 @@ const Page: React.FC = () => {
               <EducationForm onInputChange={(name, value) => handleFormInputChange('education', name, value)} />
             )}
             <div className="flex mb-4">
-              {/* Experience Section */}
-              <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>
+              <p className="text-xl font-semibold flex-1 form-header">
                 Experience
                 <button
                   type="button"
@@ -108,8 +105,7 @@ const Page: React.FC = () => {
               <ExperienceForm onInputChange={(name, value) => handleFormInputChange('experience', name, value)} />
             )}
             <div className="flex mb-4">
-              {/* Skills Section */}
-              <p className="text-xl font-semibold flex-1" style={{ fontSize: '20px', marginBottom: '5px', textAlign: 'center' }}>
+              <p className="text-xl font-semibold flex-1 form-header">
                 Skills
                 <button
                   type="button"
@@ -133,17 +129,16 @@ const Page: React.FC = () => {
             )}
             <button
               type="submit"
-              className="button-save" style={{ textAlign: 'center' }}
+              className="button-save center"
             >
               Download
             </button>
           </form>
         </div>
       </div>
-      <div className="cv-preview-container flex-1 ml-8 overflow-y-auto" style={{ height: '100vh' }}>
+      <div className="cv-preview-container flex-1 ml-8 overflow-y-auto">
         <Card className="bg-white rounded shadow">
           <div className="CVPreview-container">
-            {/* CV Preview */}
             <CVPreview
               personalFormData={personalFormData}
               educationFormData={educationFormData}

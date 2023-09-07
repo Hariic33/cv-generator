@@ -5,7 +5,7 @@ import EducationSection from './EducationSection';
 import ExperienceSection from './ExperienceSection';
 import SkillsSection from './SkillsSection';
 
-import { PersonalFormData, EducationFormData, ExperienceFormData } from '../types';
+import { PersonalFormData, EducationFormData, ExperienceFormData } from '../data/types';
 
 interface CVPreviewProps {
   personalFormData: PersonalFormData;
