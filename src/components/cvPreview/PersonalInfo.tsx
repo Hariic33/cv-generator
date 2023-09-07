@@ -1,6 +1,6 @@
 import React from 'react';
 import { CalendarOutlined, FlagOutlined, HomeOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
-import { PersonalFormData } from '../types';
+import { PersonalFormData } from '../data/types';
 
 interface PersonalInfoProps {
   personalFormData: PersonalFormData;

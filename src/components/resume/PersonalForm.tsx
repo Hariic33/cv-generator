@@ -1,7 +1,7 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { PersonalFormData } from './types';
+import { PersonalFormData } from '../data/types';
 
 interface PersonalFormProps {
   formData: PersonalFormData;
@@ -21,7 +21,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({ formData, onInputChange, se
     if (value instanceof Date) {
       value = value.toLocaleDateString();
     }
-    
+
     return (
       <div>
         <label htmlFor={name}>
@@ -51,7 +51,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({ formData, onInputChange, se
       {renderInputField('address', 'Address', 'Enter your address', 'recommended')}
       <div>
         <label htmlFor="birthDate">
-          Date of Birth <span style={{ fontSize: '12px', color: 'gray' }}>(optional)</span>
+          Date of Birth <span className="optional-label">(optional)</span>
         </label>
         <br />
         <DatePicker
