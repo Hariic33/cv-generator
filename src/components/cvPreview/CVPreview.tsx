@@ -4,6 +4,7 @@ import PersonalInfo from './PersonalInfo';
 import EducationSection from './EducationSection';
 import ExperienceSection from './ExperienceSection';
 import SkillsSection from './SkillsSection';
+import LanguagesSection from './LanguagesSection';
 
 import { PersonalFormData, EducationFormData, ExperienceFormData } from '../data/types';
 
@@ -13,6 +14,7 @@ interface CVPreviewProps {
   selectedDate: Date | null;
   experienceFormData: ExperienceFormData;
   skills: string[];
+  languages: { name: string; level: string }[];
 }
 
 const formatDate = (inputDate: Date | null, isBirthDate: boolean = false) => {
@@ -29,7 +31,7 @@ const formatDate = (inputDate: Date | null, isBirthDate: boolean = false) => {
   return `${month}-${year}`;
 };
 
-const CVPreview: React.FC<CVPreviewProps> = ({ personalFormData, educationFormData, experienceFormData, skills }) => {
+const CVPreview: React.FC<CVPreviewProps> = ({ personalFormData, educationFormData, experienceFormData, skills, languages }) => {
   return (
     <Card>
       <h2 style={{ fontSize: '32px', marginTop: '20px', textAlign: 'center' }}>{personalFormData.fullName}</h2>
@@ -42,6 +44,8 @@ const CVPreview: React.FC<CVPreviewProps> = ({ personalFormData, educationFormDa
       <ExperienceSection experienceFormData={experienceFormData} formatDate={formatDate} />
 
       <SkillsSection skills={skills} />
+
+      <LanguagesSection languages={languages} />
     </Card>
   );
 };

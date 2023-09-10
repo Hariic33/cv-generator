@@ -5,6 +5,7 @@ import PersonalForm from '@/components/resume/PersonalForm';
 import EducationForm from '@/components/resume/EducationForm';
 import ExperienceForm from '@/components/resume/ExperienceForm';
 import Skills from '@/components/resume/Skills';
+import Languages from '@/components/resume/Languages';
 import CVPreview from '@/components/cvPreview/CVPreview';
 import './globals.css';
 import {
@@ -18,11 +19,13 @@ const Page: React.FC = () => {
   const [educationFormData, setEducationFormData] = useState(initialEducationFormData);
   const [experienceFormData, setExperienceFormData] = useState(initialExperienceFormData);
 
-  const [skills, setSkills] = useState<string[]>([]);
   const [isEducationFormVisible, setEducationFormVisible] = useState(false);
   const [isExperienceFormVisible, setExperienceFormVisible] = useState(false);
-  const [isSkillsFormVisible, setSkillsFormVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [skills, setSkills] = useState<string[]>([]);
+  const [isSkillsFormVisible, setSkillsFormVisible] = useState(false);
+  const [languages, setLanguages] = useState<{ name: string; level: string }[]>([]);
+  const [isLanguagesFormVisible, setLanguagesFormVisible] = useState(false);
 
   const handlePersonalFormInputChange = (name: string, value: string) => {
     setPersonalFormData(prevData => ({ ...prevData, [name]: value }));
@@ -44,19 +47,32 @@ const Page: React.FC = () => {
     console.log('Skills:', skills);
   };
 
-  const toggleFormVisibility = (formType: 'education' | 'experience' | 'skills') => {
-    if (formType === 'education') {
-      setEducationFormVisible(prevVisible => !prevVisible);
-    } else if (formType === 'experience') {
-      setExperienceFormVisible(prevVisible => !prevVisible);
-    } else if (formType === 'skills') {
-      setSkillsFormVisible(prevVisible => !prevVisible);
-    }
-  };
-
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
     setPersonalFormData(prevData => ({ ...prevData, birthDate: date }));
+  };
+
+  const handleAddLanguage = (name: string, level: string) => {
+    const newLanguage = { name, level };
+    setLanguages((prevLanguages) => [...prevLanguages, newLanguage]);
+  };
+
+  const handleRemoveLanguage = (index: number) => {
+    const updatedLanguages = [...languages];
+    updatedLanguages.splice(index, 1);
+    setLanguages(updatedLanguages);
+  };
+
+  const toggleFormVisibility = (formType: 'education' | 'experience' | 'skills' | 'languages') => {
+    if (formType === 'education') {
+      setEducationFormVisible((prevVisible) => !prevVisible);
+    } else if (formType === 'experience') {
+      setExperienceFormVisible((prevVisible) => !prevVisible);
+    } else if (formType === 'skills') {
+      setSkillsFormVisible((prevVisible) => !prevVisible);
+    } else if (formType === 'languages') {
+      setLanguagesFormVisible((prevVisible) => !prevVisible);
+    }
   };
 
   return (
@@ -127,6 +143,25 @@ const Page: React.FC = () => {
                 }}
               />
             )}
+            <div className="flex mb-4">
+              <p className="text-xl font-semibold flex-1 form-header">
+                Languages
+                <button
+                  type="button"
+                  onClick={() => toggleFormVisibility('languages')}
+                  className={isLanguagesFormVisible ? 'button-toggle-active' : 'button-toggle'}
+                >
+                  {isLanguagesFormVisible ? '-' : '+'}
+                </button>
+              </p>
+            </div>
+            {isLanguagesFormVisible && (
+              <Languages
+                languages={languages}
+                onAddLanguage={handleAddLanguage}
+                onRemoveLanguage={handleRemoveLanguage}
+              />
+            )}
             <button
               type="submit"
               className="button-save center"
@@ -145,6 +180,7 @@ const Page: React.FC = () => {
               selectedDate={selectedDate}
               experienceFormData={experienceFormData}
               skills={skills}
+              languages={languages}
             />
           </div>
         </Card>
