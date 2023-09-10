@@ -28,3 +28,10 @@ export interface ExperienceFormData {
     endDate: Date | null;
     description: string;
 }
+
+export interface Certificate {
+    name: string;
+    link: string;
+    additionalInfo: string;
+  }
+  
