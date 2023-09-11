@@ -18,7 +18,10 @@ button:hover {
   background-color: #0056b3;
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='tel'],
+input[type='email'],
+input[type='url'] {
   padding: 10px;
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
@@ -46,10 +49,6 @@ body {
   margin-right: 16px;
 }
 
-.max-w-md {
-  max-width: 50%;
-}
-
 form {
   max-width: 400px;
   margin: 0 auto;
@@ -62,14 +61,39 @@ form {
   margin-bottom: 5px;
 }
 
+.textarea {
+  width: 100%;
+  height: 100px;
+  min-height: 10px;
+  max-height: 200px;
+  padding: 10px;
+  resize: vertical;
+  overflow-y: auto;
+}
+
 h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
+.bold-text {
+  font-weight: bold;
+}
+
 .mb-4 {
   margin-bottom: 16px;
+}
+
+.full-name {
+  font-size: 32px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.job-title {
+  font-size: 24px;
+  text-align: center;
 }
 
 .CVPreview-container {
@@ -78,13 +102,6 @@ h2 {
   background-color: rgb(255, 255, 255);
   color: rgb(49, 61, 93);
   max-width: 100%;
-}
-
-.CVPreview-sections {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
 }
 
 .CVPreview-section {
@@ -98,6 +115,7 @@ h2 {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 10px;
+  margin-top: 5px;
 }
 
 .CVPreview-field {
@@ -109,12 +127,20 @@ h2 {
   max-width: 100%;
 }
 
+.CVPreview-header {
+  background-color: #a4adb6;
+  font-size: 20px;
+  margin-top: 1px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
 .overflow-y-auto {
   overflow-y: auto;
   height: 100vh;
 }
 
-.optional-label {
+.recommendation-label {
   font-size: 12px;
   color: gray;
 }

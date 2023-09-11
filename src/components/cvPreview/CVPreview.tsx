@@ -37,8 +37,8 @@ const formatDate = (inputDate: Date | null, isBirthDate: boolean = false) => {
 const CVPreview: React.FC<CVPreviewProps> = ({ personalFormData, educationFormData, experienceFormData, skills, languages, certificates, hobbies }) => {
   return (
     <Card>
-      <h2 style={{ fontSize: '32px', marginTop: '20px', textAlign: 'center' }}>{personalFormData.fullName}</h2>
-      <h2 style={{ fontSize: '24px', textAlign: 'center' }}>{personalFormData.jobTitle}</h2>
+      <h2 className="full-name">{personalFormData.fullName}</h2>
+      <h2 className="job-title">{personalFormData.jobTitle}</h2>
       <PersonalInfo personalFormData={personalFormData} formatDate={formatDate} />
       <EducationSection educationFormData={educationFormData} formatDate={formatDate} />
       <ExperienceSection experienceFormData={experienceFormData} formatDate={formatDate} />

@@ -9,10 +9,8 @@ const LanguagesSection: React.FC<LanguagesSectionProps> = ({ languages }) => {
         languages.length > 0 ? (
             <div className="CVPreview-section">
                 <div className="CVPreview-container">
-                    <div style={{ backgroundColor: '#a4adb6' }}>
-                        <h2 style={{ fontSize: '20px', marginTop: '1px', marginBottom: '5px', textAlign: 'center' }}>Languages</h2>
-                    </div>
-                    <div className="CVPreview-row" style={{ marginTop: '5px' }}>
+                    <h2 className="CVPreview-header">Languages</h2>
+                    <div className="CVPreview-row">
                         <div className="CVPreview-field">
                             <ul>
                                 {languages.map((language, index) => (

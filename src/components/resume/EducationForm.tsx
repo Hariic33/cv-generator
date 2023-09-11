@@ -1,32 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { EducationFormData } from '../data/types';
-import { initialEducationFormData } from '../data/initialFormData';
 
 interface EducationFormProps {
   onInputChange: (name: string, value: string | Date | null) => void;
+  formData: EducationFormData;
 }
 
-const EducationForm: React.FC<EducationFormProps> = ({ onInputChange }) => {
-  const [formData, setFormData] = useState<EducationFormData>(initialEducationFormData);
-
-  const handleInputChange = (name: string, value: string | Date | null) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-
-    onInputChange(name, value);
-  };
-
-  const renderInputField = (name: keyof EducationFormData, label: string, placeholder: string, showDatePicker = false) => {
+const EducationForm: React.FC<EducationFormProps> = ({ onInputChange, formData }) => {
+  const renderInputField = (
+    name: keyof EducationFormData,
+    label: string,
+    placeholder: string,
+    showDatePicker = false
+  ) => {
     const value = formData[name];
+
+    const handleChange = (newValue: string | Date | null) => {
+      onInputChange(name, newValue);
+    };
 
     const inputElement = showDatePicker ? (
       <DatePicker
         selected={value ? new Date(value) : null}
-        onChange={(date: Date | null) => handleInputChange(name, date)}
+        onChange={(date: Date | null) => handleChange(date)}
         dateFormat="MM/yyyy"
         showMonthYearPicker
         placeholderText={`Select ${label.toLowerCase()}`}
@@ -36,7 +34,7 @@ const EducationForm: React.FC<EducationFormProps> = ({ onInputChange }) => {
         type="text"
         name={name}
         value={value instanceof Date ? value.toISOString().substr(0, 10) : value || ''}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(name, e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value)}
         placeholder={placeholder}
       />
     );
