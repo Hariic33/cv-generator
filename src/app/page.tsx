@@ -8,6 +8,7 @@ import Skills from '@/components/resume/Skills';
 import Languages from '@/components/resume/Languages';
 import CertificateForm from '@/components/resume/CertificateForm';
 import { Certificate } from '@/components/data/types';
+import Hobbies from '@/components/resume/Hobbies';
 import CVPreview from '@/components/cvPreview/CVPreview';
 import './globals.css';
 import { initialPersonalFormData, initialEducationFormData, initialExperienceFormData } from '@/components/data/initialFormData';
@@ -25,6 +26,8 @@ const Page: React.FC = () => {
   const [isLanguagesFormVisible, setLanguagesFormVisible] = useState(false);
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [isCertificatesFormVisible, setCertificatesFormVisible] = useState(false);
+  const [hobbies, setHobbies] = useState<string[]>([]);
+  const [isHobbiesFormVisible, setHobbiesFormVisible] = useState(false);
 
   const handlePersonalFormInputChange = (name: string, value: string) => {
     setPersonalFormData(prevData => ({ ...prevData, [name]: value }));
@@ -44,6 +47,9 @@ const Page: React.FC = () => {
     console.log('Education Form Data:', educationFormData);
     console.log('Experience Form Data:', experienceFormData);
     console.log('Skills:', skills);
+    console.log('Languages:', languages);
+    console.log('Certificates:', certificates)
+    console.log('Hobbies:', hobbies);
   };
 
   const handleDateChange = (date: Date | null) => {
@@ -72,7 +78,7 @@ const Page: React.FC = () => {
     setCertificates(updatedCertificates);
   };
 
-  const toggleFormVisibility = (formType: 'education' | 'experience' | 'skills' | 'languages' | 'certificates') => {
+  const toggleFormVisibility = (formType: 'education' | 'experience' | 'skills' | 'languages' | 'certificates' | 'hobbies') => {
     if (formType === 'education') {
       setEducationFormVisible((prevVisible) => !prevVisible);
     } else if (formType === 'experience') {
@@ -83,6 +89,8 @@ const Page: React.FC = () => {
       setLanguagesFormVisible((prevVisible) => !prevVisible);
     } else if (formType === 'certificates') {
       setCertificatesFormVisible((prevVisible) => !prevVisible);
+    } else if (formType === 'hobbies') {
+      setHobbiesFormVisible((prevVisible) => !prevVisible);
     }
   };
 
@@ -191,6 +199,29 @@ const Page: React.FC = () => {
                 onRemoveCertificate={handleRemoveCertificate}
                 certificates={certificates}
               />)}
+            <div className="flex mb-4">
+              <p className="text-xl font-semibold flex-1 form-header">
+                Hobbies
+                <button
+                  type="button"
+                  onClick={() => toggleFormVisibility('hobbies')}
+                  className={isHobbiesFormVisible ? 'button-toggle-active' : 'button-toggle'}
+                >
+                  {isHobbiesFormVisible ? '-' : '+'}
+                </button>
+              </p>
+            </div>
+            {isHobbiesFormVisible && (
+              <Hobbies
+                hobbies={hobbies}
+                onAddHobby={(hobby) => setHobbies((prevHobbies) => [...prevHobbies, hobby])}
+                onRemoveHobby={(index) => {
+                  const updatedHobbies = [...hobbies];
+                  updatedHobbies.splice(index, 1);
+                  setHobbies(updatedHobbies);
+                }}
+              />
+            )}
             <button
               type="submit"
               className="button-save center"
@@ -211,6 +242,7 @@ const Page: React.FC = () => {
               skills={skills}
               languages={languages}
               certificates={certificates}
+              hobbies={hobbies}
             />
           </div>
         </Card>
