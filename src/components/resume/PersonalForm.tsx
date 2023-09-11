@@ -5,67 +5,62 @@ import { PersonalFormData } from '../data/types';
 
 interface PersonalFormProps {
   formData: PersonalFormData;
-  onInputChange: (name: string, value: string) => void;
+  onInputChange: (name: string, value: string | Date | null) => void;
   onDateChange: (date: Date | null) => void;
   selectedDate: Date | null;
 }
 
-const PersonalForm: React.FC<PersonalFormProps> = ({ formData, onInputChange, selectedDate, onDateChange }) => {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    onInputChange(name, value);
-  };
-
-  const renderInputField = (name: keyof PersonalFormData, label: string, placeholder: string, recommendationType: string) => {
-    let value = formData[name];
-    if (value instanceof Date) {
-      value = value.toLocaleDateString();
-    }
-
-    return (
-      <div>
-        <label htmlFor={name}>
-          {label} {recommendationType && <span style={{ fontSize: '12px', color: 'gray' }}>({recommendationType})</span>}
-        </label>
-        <input
-          type="text"
-          name={name}
-          value={value || ''}
-          onChange={handleInputChange}
-          placeholder={placeholder}
-        />
-      </div>
-    );
-  };
-
-  const handleDateChange = (date: Date | null) => {
-    onDateChange(date);
-  };
+const renderInputField = (
+  name: keyof PersonalFormData,
+  label: string,
+  placeholder: string,
+  recommendationType: string | undefined,
+  inputType: string = 'text',
+  additionalProps: any = {}
+) => {
+  const { formData, selectedDate, onInputChange, onDateChange } = additionalProps;
+  const value = name === 'birthDate' ? selectedDate : formData[name];
 
   return (
-    <div>
-      {renderInputField('fullName', 'Full Name', 'Enter your full name', 'required')}
-      {renderInputField('jobTitle', 'Job Title', 'Enter your job title', 'optional')}
-      {renderInputField('emailAddress', 'Email Address', 'Enter your email address', 'recommended')}
-      {renderInputField('phoneNumber', 'Phone Number', 'Enter your phone number', 'recommended')}
-      {renderInputField('address', 'Address', 'Enter your address', 'recommended')}
-      <div>
-        <label htmlFor="birthDate">
-          Date of Birth <span className="optional-label">(optional)</span>
-        </label>
-        <br />
-        <DatePicker
-          selected={selectedDate}
-          onChange={handleDateChange}
-          dateFormat="dd-MM-yyyy"
-          placeholderText="Select a date"
+    <div key={name}>
+      <label htmlFor={name}>
+        {label} {recommendationType && <span className="recommendation-label">({recommendationType})</span>}
+      </label>
+      {name === 'birthDate' ? (
+        <>
+          <br />
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date: Date | null) => onDateChange(date)}
+            dateFormat="dd-MM-yyyy"
+            placeholderText="Select a date"
+          />
+        </>
+      ) : (
+        <input
+          type={inputType}
+          name={name}
+          value={value instanceof Date ? value.toLocaleDateString() : value || ''}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInputChange(name, e.target.value)}
+          placeholder={placeholder}
         />
-      </div>
-      {renderInputField('nationality', 'Nationality', 'Enter your nationality', 'optional')}
-      {renderInputField('gender', 'Gender', 'Enter your gender', 'optional')}
-      {renderInputField('linkedIn', 'LinkedIn', 'Enter your LinkedIn', 'optional')}
+      )}
     </div>
   );
 };
+
+const PersonalForm: React.FC<PersonalFormProps> = (props) => (
+  <div>
+    {renderInputField('fullName', 'Full Name', 'Enter your full name', 'required', 'text', props)}
+    {renderInputField('jobTitle', 'Job Title', 'Enter your job title', 'optional', 'text', props)}
+    {renderInputField('emailAddress', 'Email Address', 'Enter your email address', 'recommended', 'email', props)}
+    {renderInputField('phoneNumber', 'Phone Number', 'Enter your phone number', 'recommended', 'tel', props)}
+    {renderInputField('address', 'Address', 'Enter your address', 'recommended', 'text', props)}
+    {renderInputField('birthDate', 'Date of Birth', '', 'optional', 'date', props)}
+    {renderInputField('nationality', 'Nationality', 'Enter your nationality', 'optional', 'text', props)}
+    {renderInputField('gender', 'Gender', 'Enter your gender', 'optional', 'text', props)}
+    {renderInputField('linkedIn', 'LinkedIn', 'Enter your LinkedIn', 'optional', 'url', props)}
+  </div>
+);
 
 export default PersonalForm;

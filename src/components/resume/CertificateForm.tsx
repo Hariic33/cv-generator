@@ -30,25 +30,22 @@ const CertificateForm: React.FC<CertificateFormProps> = ({
 
   return (
     <div>
-      <input
-        type="text"
-        name="name"
-        placeholder="Certificate Name"
-        value={certificateData.name}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="link"
-        placeholder="Certificate Link"
-        value={certificateData.link}
-        onChange={handleInputChange}
-      />
+      {['name', 'link'].map((fieldName) => (
+        <input
+          type="text"
+          name={fieldName}
+          placeholder={`Certificate ${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`}
+          value={certificateData[fieldName as keyof Certificate]}
+          onChange={handleInputChange}
+          key={fieldName}
+        />
+      ))}
       <textarea
         name="additionalInfo"
-        placeholder="Additional Information (optional)"
         value={certificateData.additionalInfo}
         onChange={handleInputChange}
+        placeholder="Additional information"
+        className="textarea"
       />
       <button onClick={handleAddCertificate}>Add Certificate</button>
       <ul>

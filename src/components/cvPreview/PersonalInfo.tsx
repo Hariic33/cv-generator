@@ -28,21 +28,19 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalFormData, formatDat
 
   return (
     <div className="CVPreview-container">
-      <div className="CVPreview-row" style={{ marginTop: '5px', marginBottom: '30px', justifyContent: 'center' }}>
-        {Object.entries(personalFormData).map(([field, value]) => field !== 'fullName' && field !== 'jobTitle' && field !== 'birthDate' && value ? (
-          <div className="CVPreview-field" style={{ justifyContent: 'center' }} key={field}>
-            <span style={{ marginRight: '5px' }}>{getIcon(field)}</span>
-            <span>{value}</span>
-          </div>
-        ) : field === 'birthDate' && value ? (
-          <div className="CVPreview-field" style={{ justifyContent: 'center' }} key={field}>
-            <span style={{ marginRight: '5px' }}>
-              <CalendarOutlined />
-            </span>
-            <span>{formatDate(value, true)}</span>
-          </div>
-        ) : null
-        )}
+      <div className="CVPreview-row" style={{ marginBottom: '30px', justifyContent: 'center' }}>
+        {Object.entries(personalFormData).map(([field, value]) => {
+          if (field === 'fullName' || field === 'jobTitle') return null;
+
+          const icon = field === 'birthDate' ? <CalendarOutlined /> : getIcon(field);
+
+          return value ? (
+            <div className="CVPreview-field" style={{ justifyContent: 'center' }} key={field}>
+              <span style={{ marginRight: '5px' }}>{icon}</span>
+              <span>{field === 'birthDate' ? formatDate(value, true) : value}</span>
+            </div>
+          ) : null;
+        })}
       </div>
     </div>
   );

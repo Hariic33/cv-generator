@@ -11,12 +11,10 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experienceFormDat
     (experienceFormData.jobTitle || experienceFormData.employer || (experienceFormData.startDate && experienceFormData.endDate) || experienceFormData.description) ? (
       <div className="CVPreview-section">
         <div className="CVPreview-container">
-          <div style={{ backgroundColor: '#a4adb6' }}>
-            <h2 style={{ fontSize: '20px', marginTop: '1px', marginBottom: '5px', textAlign: 'center' }}>Experience</h2>
-          </div>
-          <div className="CVPreview-row" style={{ marginTop: '5px' }}>
-            {experienceFormData.jobTitle && <span style={{ fontWeight: 'bold' }}>{experienceFormData.jobTitle},</span>}
-            {experienceFormData.employer && <span style={{ fontWeight: 'bold' }}>{experienceFormData.employer},</span>}
+          <h2 className="CVPreview-header">Experience</h2>
+          <div className="CVPreview-row">
+            {experienceFormData.jobTitle && <span className="bold-text">{experienceFormData.jobTitle},</span>}
+            {experienceFormData.employer && <span className="bold-text">{experienceFormData.employer},</span>}
             {experienceFormData.startDate && experienceFormData.endDate && (
               <span>
                 {formatDate(experienceFormData.startDate)} - {formatDate(experienceFormData.endDate)} | {experienceFormData.city}, {experienceFormData.country}

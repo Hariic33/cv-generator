@@ -8,26 +8,22 @@ interface EducationSectionProps {
 
 const EducationSection: React.FC<EducationSectionProps> = ({ educationFormData, formatDate }) => {
     return (
-        <div className="CVPreview-sections">
-            {educationFormData.degree || educationFormData.schoolName || (educationFormData.startDate && educationFormData.endDate) ? (
-                <div className="CVPreview-section">
-                    <div className="CVPreview-container">
-                        <div style={{ backgroundColor: '#a4adb6' }}>
-                            <h2 style={{ fontSize: '20px', marginTop: '1px', marginBottom: '5px', textAlign: 'center' }}>Education</h2>
-                        </div>
-                        <div className="CVPreview-row" style={{ marginTop: '5px' }}>
-                            {educationFormData.degree && <span style={{ fontWeight: 'bold' }}>{educationFormData.degree},</span>}
-                            {educationFormData.schoolName && <span style={{ fontWeight: 'bold' }}>{educationFormData.schoolName}</span>}
-                            {educationFormData.startDate && educationFormData.endDate && (
-                                <span>
-                                    {formatDate(educationFormData.startDate)} - {formatDate(educationFormData.endDate)} | {educationFormData.city}, {educationFormData.country}
-                                </span>
-                            )}
-                        </div>
+        educationFormData.degree || educationFormData.schoolName || (educationFormData.startDate && educationFormData.endDate) ? (
+            <div className="CVPreview-section">
+                <div className="CVPreview-container">
+                    <h2 className="CVPreview-header">Education</h2>
+                    <div className="CVPreview-row">
+                        {educationFormData.degree && <span className="bold-text">{educationFormData.degree},</span>}
+                        {educationFormData.schoolName && <span className="bold-text">{educationFormData.schoolName}</span>}
+                        {educationFormData.startDate && educationFormData.endDate && (
+                            <span>
+                                {formatDate(educationFormData.startDate)} - {formatDate(educationFormData.endDate)} | {educationFormData.city}, {educationFormData.country}
+                            </span>
+                        )}
                     </div>
                 </div>
-            ) : null}
-        </div>
+            </div>
+        ) : null
     );
 };
 
