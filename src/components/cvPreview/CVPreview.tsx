@@ -6,6 +6,7 @@ import ExperienceSection from './ExperienceSection';
 import SkillsSection from './SkillsSection';
 import LanguagesSection from './LanguagesSection';
 import CertificatesSection from './CertificatesSection';
+import HobbiesSection from './HobbiesSection';
 import { PersonalFormData, EducationFormData, ExperienceFormData, Certificate } from '../data/types';
 
 interface CVPreviewProps {
@@ -16,6 +17,7 @@ interface CVPreviewProps {
   skills: string[];
   languages: { name: string; level: string }[];
   certificates: Certificate[];
+  hobbies: string[];
 }
 
 const formatDate = (inputDate: Date | null, isBirthDate: boolean = false) => {
@@ -32,23 +34,18 @@ const formatDate = (inputDate: Date | null, isBirthDate: boolean = false) => {
   return `${month}-${year}`;
 };
 
-const CVPreview: React.FC<CVPreviewProps> = ({ personalFormData, educationFormData, experienceFormData, skills, languages, certificates }) => {
+const CVPreview: React.FC<CVPreviewProps> = ({ personalFormData, educationFormData, experienceFormData, skills, languages, certificates, hobbies }) => {
   return (
     <Card>
       <h2 style={{ fontSize: '32px', marginTop: '20px', textAlign: 'center' }}>{personalFormData.fullName}</h2>
       <h2 style={{ fontSize: '24px', textAlign: 'center' }}>{personalFormData.jobTitle}</h2>
-
       <PersonalInfo personalFormData={personalFormData} formatDate={formatDate} />
-
       <EducationSection educationFormData={educationFormData} formatDate={formatDate} />
-
       <ExperienceSection experienceFormData={experienceFormData} formatDate={formatDate} />
-
       <SkillsSection skills={skills} />
-
       <LanguagesSection languages={languages} />
-
       <CertificatesSection certificates={certificates} />
+      <HobbiesSection hobbies={hobbies} />
     </Card>
   );
 };
