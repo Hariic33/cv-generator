@@ -1,4 +1,4 @@
-import { PersonalFormData, EducationFormData, ExperienceFormData } from './types';
+import { PersonalFormData, EducationFormData, ExperienceFormData, ReferenceFormData } from './types';
 
 export const initialPersonalFormData: PersonalFormData = {
   fullName: '',
@@ -29,4 +29,12 @@ export const initialExperienceFormData: ExperienceFormData = {
   startDate: null,
   endDate: null,
   description: '',
+};
+
+export const initialReferenceFormData: ReferenceFormData = {
+  fullName: '',
+  jobTitle: '',
+  organization: '',
+  emailAddress: '',
+  phoneNumber: '',
 };

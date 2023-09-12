@@ -10,8 +10,9 @@ import Languages from '@/components/resume/Languages';
 import CertificateForm from '@/components/resume/CertificateForm';
 import { Certificate } from '@/components/data/types';
 import Hobbies from '@/components/resume/Hobbies';
+import ReferenceForm from '@/components/resume/ReferenceForm';
 import CVPreview from '@/components/cvPreview/CVPreview';
-import { initialPersonalFormData, initialEducationFormData, initialExperienceFormData } from '@/components/data/initialFormData';
+import { initialPersonalFormData, initialEducationFormData, initialExperienceFormData, initialReferenceFormData } from '@/components/data/initialFormData';
 import FormSection from '@/components/resume/FormSection';
 
 function useFormWithVisibility<T>(initialData: T, initialVisibility = false) {
@@ -29,6 +30,7 @@ const Page: React.FC = () => {
   const [languages, setLanguages, isLanguagesFormVisible, setLanguagesFormVisible] = useFormWithVisibility<{ name: string; level: string }[]>([]);
   const [certificates, setCertificates, isCertificatesFormVisible, setCertificatesFormVisible] = useFormWithVisibility<Certificate[]>([]);
   const [hobbies, setHobbies, isHobbiesFormVisible, setHobbiesFormVisible] = useFormWithVisibility<string[]>([]);
+  const [referenceFormData, setReferenceFormData, isReferenceFormVisible, setReferenceFormVisible] = useFormWithVisibility(initialReferenceFormData);
 
   const handleSave = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,6 +41,7 @@ const Page: React.FC = () => {
     console.log('Languages:', languages);
     console.log('Certificates:', certificates)
     console.log('Hobbies:', hobbies);
+    console.log('Reference Form Data:', referenceFormData);
   };
 
   const handleDateChange = (date: Date | null) => {
@@ -56,7 +59,7 @@ const Page: React.FC = () => {
     setCertificates(updatedCertificates);
   };
 
-  const toggleFormVisibility = (formType: 'education' | 'experience' | 'skills' | 'languages' | 'certificates' | 'hobbies') => {
+  const toggleFormVisibility = (formType: 'education' | 'experience' | 'skills' | 'languages' | 'certificates' | 'hobbies' | 'references') => {
     if (formType === 'education') {
       setEducationFormVisible((prevVisible) => !prevVisible);
     } else if (formType === 'experience') {
@@ -69,6 +72,8 @@ const Page: React.FC = () => {
       setCertificatesFormVisible((prevVisible) => !prevVisible);
     } else if (formType === 'hobbies') {
       setHobbiesFormVisible((prevVisible) => !prevVisible);
+    } else if (formType === 'references') {
+      setReferenceFormVisible((prevVisible) => !prevVisible);
     }
   };
 
@@ -154,6 +159,16 @@ const Page: React.FC = () => {
               }}
             />
           </FormSection>
+          <FormSection
+            title="References"
+            isVisible={isReferenceFormVisible}
+            onToggle={() => toggleFormVisibility('references')}
+          >
+            <ReferenceForm
+              formData={referenceFormData}
+              onInputChange={(name, value) => setReferenceFormData((prevData) => ({ ...prevData, [name]: value }))}
+            />
+          </FormSection>
           <button
             type="submit"
             className="button-save center"
@@ -174,6 +189,7 @@ const Page: React.FC = () => {
               languages={languages}
               certificates={certificates}
               hobbies={hobbies}
+              referenceFormData={referenceFormData}
             />
           </div>
         </Card>
