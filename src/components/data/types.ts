@@ -33,5 +33,12 @@ export interface Certificate {
     name: string;
     link: string;
     additionalInfo: string;
-  }
-  
+}
+
+export interface ReferenceFormData {
+    fullName: string,
+    jobTitle: string,
+    organization: string,
+    emailAddress: string,
+    phoneNumber: string,
+}
