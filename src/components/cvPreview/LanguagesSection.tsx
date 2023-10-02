@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../app/css/cvPreview.css';
 
 interface LanguagesSectionProps {
     languages: { name: string; level: string }[];

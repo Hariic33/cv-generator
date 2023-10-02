@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReferenceFormData } from '../data/types';
+import '../../app/css/cvPreview.css';
 
 interface ReferenceSectionProps {
     referenceFormData: ReferenceFormData;

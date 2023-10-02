@@ -1,5 +1,6 @@
 import React from 'react';
 import { Certificate } from '../data/types';
+import '../../app/css/cvPreview.css';
 
 interface CertificatesSectionProps {
     certificates: Certificate[];

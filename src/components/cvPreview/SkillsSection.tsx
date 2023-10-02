@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../app/css/cvPreview.css';
 
 interface SkillsSectionProps {
   skills: string[];

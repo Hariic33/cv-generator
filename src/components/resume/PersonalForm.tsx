@@ -59,7 +59,7 @@ const PersonalForm: React.FC<PersonalFormProps> = (props) => (
     {renderInputField('birthDate', 'Date of Birth', '', 'optional', 'date', props)}
     {renderInputField('nationality', 'Nationality', 'Enter your nationality', 'optional', 'text', props)}
     {renderInputField('gender', 'Gender', 'Enter your gender', 'optional', 'text', props)}
-    {renderInputField('linkedIn', 'LinkedIn', 'Enter your LinkedIn', 'optional', 'url', props)}
+    {renderInputField('linkedIn', 'LinkedIn', 'Enter your LinkedIn', 'optional', 'text', props)}
   </div>
 );
 

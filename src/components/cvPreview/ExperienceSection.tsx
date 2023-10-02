@@ -1,5 +1,6 @@
 import React from 'react';
 import { ExperienceFormData } from '../data/types';
+import '../../app/css/cvPreview.css';
 
 interface ExperienceSectionProps {
   experienceFormData: ExperienceFormData;

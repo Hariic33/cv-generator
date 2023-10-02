@@ -1,6 +1,7 @@
 import React from 'react';
 import { CalendarOutlined, FlagOutlined, HomeOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
 import { PersonalFormData } from '../data/types';
+import '../../app/css/cvPreview.css';
 
 interface PersonalInfoProps {
   personalFormData: PersonalFormData;

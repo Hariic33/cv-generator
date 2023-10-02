@@ -1,5 +1,6 @@
 import React from 'react';
 import { EducationFormData } from '../data/types';
+import '../../app/css/cvPreview.css';
 
 interface EducationSectionProps {
     educationFormData: EducationFormData;

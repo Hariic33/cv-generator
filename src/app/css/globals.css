@@ -32,7 +32,7 @@ input[type='url'] {
 main {
   background-color: #f0f0f0;
   display: flex;
-  padding: 50px 100px 60px 100px;
+  padding: 60px 100px 60px 100px;
   min-height: 100vh;
 }
 
@@ -77,6 +77,10 @@ h2 {
   margin-bottom: 20px;
 }
 
+select {
+  margin-bottom: 10px;
+}
+
 .bold-text {
   font-weight: bold;
 }
@@ -93,45 +97,6 @@ h2 {
 
 .job-title {
   font-size: 24px;
-  text-align: center;
-}
-
-.CVPreview-container {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(255, 255, 255);
-  color: rgb(49, 61, 93);
-  max-width: 100%;
-}
-
-.CVPreview-section {
-  flex-basis: calc(50% - 30px);
-  max-width: calc(50% - 30px);
-  align-self: flex-start;
-}
-
-.CVPreview-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 10px;
-  margin-top: 5px;
-}
-
-.CVPreview-field {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  white-space: normal;
-  overflow-wrap: break-word;
-  max-width: 100%;
-}
-
-.CVPreview-header {
-  background-color: #a4adb6;
-  font-size: 20px;
-  margin-top: 1px;
-  margin-bottom: 5px;
   text-align: center;
 }
 
