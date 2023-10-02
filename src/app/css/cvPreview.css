@@ -1,0 +1,59 @@
+.ant-card-body {
+    background-color: var(--cv-preview-primary-color);
+}
+
+.CVPreview-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--cv-preview-primary-color);
+    color: var(--cv-preview-secondary-color);
+}
+
+.CVPreview-columns {
+    display: grid;
+    grid-template-columns: 4fr 4fr;
+    grid-gap: 15px;
+}
+
+.CVPreview-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cv-preview-primary-color);
+    color: var(--cv-preview-secondary-color);
+    max-width: 100%;
+}
+
+.CVPreview-section {
+    flex-basis: calc(90%);
+    max-width: calc(90%);
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+.CVPreview-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.CVPreview-field {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.CVPreview-header {
+    background-color: var(--cv-preview-primary-color);
+    font-size: 20px;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 340px;
+    border: 1px solid var(--cv-preview-secondary-color);
+}

@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import './globals.css';
+import './css/globals.css';
 import { Card } from 'antd';
 import PersonalForm from '@/components/resume/PersonalForm';
 import EducationForm from '@/components/resume/EducationForm';
@@ -11,7 +11,7 @@ import CertificateForm from '@/components/resume/CertificateForm';
 import { Certificate } from '@/components/data/types';
 import Hobbies from '@/components/resume/Hobbies';
 import ReferenceForm from '@/components/resume/ReferenceForm';
-import CVPreview from '@/components/cvPreview/CVPreview';
+import CVPreview, { TemplateKey } from '@/components/cvPreview/CVPreview';
 import { initialPersonalFormData, initialEducationFormData, initialExperienceFormData, initialReferenceFormData } from '@/components/data/initialFormData';
 import FormSection from '@/components/resume/FormSection';
 
@@ -31,6 +31,7 @@ const Page: React.FC = () => {
   const [certificates, setCertificates, isCertificatesFormVisible, setCertificatesFormVisible] = useFormWithVisibility<Certificate[]>([]);
   const [hobbies, setHobbies, isHobbiesFormVisible, setHobbiesFormVisible] = useFormWithVisibility<string[]>([]);
   const [referenceFormData, setReferenceFormData, isReferenceFormVisible, setReferenceFormVisible] = useFormWithVisibility(initialReferenceFormData);
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateKey>('template1');
 
   const handleSave = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -77,12 +78,27 @@ const Page: React.FC = () => {
     }
   };
 
+  const handleTemplateChange = (newTemplate: TemplateKey) => {
+    setSelectedTemplate(newTemplate);
+  };
+
   return (
     <main className="flex">
       <div className="flex-1 overflow-y-auto">
         <h2 className="mb-4 center">Resume</h2>
         <p className="form-header">Personal Information</p>
         <form onSubmit={handleSave}>
+          <div className="template-selector">
+            <label>Select Template </label>
+            <select
+              value={selectedTemplate}
+              onChange={(e) => handleTemplateChange(e.target.value as TemplateKey)}
+              aria-label="Select Template"
+            >
+              <option value="template1">Light</option>
+              <option value="template2">Dark</option>
+            </select>
+          </div>
           <div className="mb-4">
             <PersonalForm
               formData={personalFormData}
@@ -190,6 +206,7 @@ const Page: React.FC = () => {
               certificates={certificates}
               hobbies={hobbies}
               referenceFormData={referenceFormData}
+              selectedTemplate={selectedTemplate}
             />
           </div>
         </Card>
