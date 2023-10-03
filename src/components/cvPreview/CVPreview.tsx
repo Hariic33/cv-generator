@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { Card } from 'antd';
 import PersonalInfo from './PersonalInfo';
 import EducationSection from './EducationSection';
@@ -7,8 +7,8 @@ import SkillsSection from './SkillsSection';
 import LanguagesSection from './LanguagesSection';
 import CertificatesSection from './CertificatesSection';
 import HobbiesSection from './HobbiesSection';
-import { PersonalFormData, EducationFormData, ExperienceFormData, Certificate, ReferenceFormData } from '../data/types';
 import ReferenceSection from './ReferenceSection';
+import { PersonalFormData, EducationFormData, ExperienceFormData, Certificate, ReferenceFormData } from '../data/types';
 
 export type TemplateKey = 'template1' | 'template2';
 
@@ -23,6 +23,7 @@ interface CVPreviewProps {
   hobbies: string[];
   referenceFormData: ReferenceFormData;
   selectedTemplate: TemplateKey;
+  cvPreviewRef: React.RefObject<HTMLDivElement>;
 }
 
 const formatDate = (inputDate: Date | null, isBirthDate: boolean = false) => {
@@ -39,6 +40,29 @@ const formatDate = (inputDate: Date | null, isBirthDate: boolean = false) => {
   return `${month}-${year}`;
 };
 
+export const handleGeneratePDF = async (cvPreviewRef: React.RefObject<HTMLDivElement>) => {
+  if (typeof window !== 'undefined') {
+    try {
+      const html2pdfModule = await import('html2pdf.js');
+      const html2pdf = html2pdfModule.default;
+
+      const element = cvPreviewRef.current;
+      const opt = {
+        filename: 'cv.pdf',
+        image: { type: 'png', quality: 1 },
+        html2canvas: { scale: 1, removeContainer: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      };
+
+      if (element) {
+        await html2pdf().from(element).set(opt).save();
+      }
+    } catch (error) {
+      console.error('Failed to load html2pdf.js:', error);
+    }
+  }
+};
+
 const CVPreview: React.FC<CVPreviewProps> = ({
   personalFormData,
   educationFormData,
@@ -49,8 +73,10 @@ const CVPreview: React.FC<CVPreviewProps> = ({
   hobbies,
   referenceFormData,
   selectedTemplate,
+  cvPreviewRef,
 }) => {
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     setTemplateStyles(selectedTemplate);
   }, [selectedTemplate]);
 
@@ -64,24 +90,26 @@ const CVPreview: React.FC<CVPreviewProps> = ({
   };
 
   return (
-    <Card className="CVPreview-card">
-      <h2 className="full-name">{personalFormData.fullName}</h2>
-      <h2 className="job-title">{personalFormData.jobTitle}</h2>
-      <PersonalInfo personalFormData={personalFormData} formatDate={formatDate} />
-      <div className="CVPreview-columns">
-        <div>
-          <EducationSection educationFormData={educationFormData} formatDate={formatDate} />
-          <SkillsSection skills={skills} />
-          <ReferenceSection referenceFormData={referenceFormData} />
+    <div ref={cvPreviewRef}>
+      <Card className="CVPreview-card">
+        <h2 className="full-name">{personalFormData.fullName}</h2>
+        <h2 className="job-title">{personalFormData.jobTitle}</h2>
+        <PersonalInfo personalFormData={personalFormData} formatDate={formatDate} />
+        <div className="CVPreview-columns">
+          <div>
+            <EducationSection educationFormData={educationFormData} formatDate={formatDate} />
+            <SkillsSection skills={skills} />
+            <ReferenceSection referenceFormData={referenceFormData} />
+          </div>
+          <div>
+            <ExperienceSection experienceFormData={experienceFormData} formatDate={formatDate} />
+            <LanguagesSection languages={languages} />
+            <HobbiesSection hobbies={hobbies} />
+            <CertificatesSection certificates={certificates} />
+          </div>
         </div>
-        <div>
-          <ExperienceSection experienceFormData={experienceFormData} formatDate={formatDate} />
-          <LanguagesSection languages={languages} />
-          <HobbiesSection hobbies={hobbies} />
-          <CertificatesSection certificates={certificates} />
-        </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
 
