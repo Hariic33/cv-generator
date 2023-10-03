@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './css/globals.css';
 import { Card } from 'antd';
 import PersonalForm from '@/components/resume/PersonalForm';
@@ -14,6 +14,7 @@ import ReferenceForm from '@/components/resume/ReferenceForm';
 import CVPreview, { TemplateKey } from '@/components/cvPreview/CVPreview';
 import { initialPersonalFormData, initialEducationFormData, initialExperienceFormData, initialReferenceFormData } from '@/components/data/initialFormData';
 import FormSection from '@/components/resume/FormSection';
+import { handleGeneratePDF } from '@/components/cvPreview/CVPreview';
 
 function useFormWithVisibility<T>(initialData: T, initialVisibility = false) {
   const [formData, setFormData] = useState<T>(initialData);
@@ -22,6 +23,7 @@ function useFormWithVisibility<T>(initialData: T, initialVisibility = false) {
 }
 
 const Page: React.FC = () => {
+  const cvPreviewRef = useRef<HTMLDivElement>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [personalFormData, setPersonalFormData, ,] = useFormWithVisibility(initialPersonalFormData);
   const [educationFormData, setEducationFormData, isEducationFormVisible, setEducationFormVisible] = useFormWithVisibility(initialEducationFormData);
@@ -185,13 +187,12 @@ const Page: React.FC = () => {
               onInputChange={(name, value) => setReferenceFormData((prevData) => ({ ...prevData, [name]: value }))}
             />
           </FormSection>
-          <button
-            type="submit"
-            className="button-save center"
-          >
-            Download
-          </button>
         </form>
+        <div className="button-container">
+          <button onClick={() => handleGeneratePDF(cvPreviewRef)}>
+            Generate PDF
+          </button>
+        </div>
       </div>
       <div className="flex-1 overflow-y-auto">
         <Card className="bg-white rounded shadow">
@@ -207,6 +208,7 @@ const Page: React.FC = () => {
               hobbies={hobbies}
               referenceFormData={referenceFormData}
               selectedTemplate={selectedTemplate}
+              cvPreviewRef={cvPreviewRef}
             />
           </div>
         </Card>
