@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Card } from 'antd';
 import PersonalInfo from './PersonalInfo';
 import EducationSection from './EducationSection';
@@ -10,7 +10,7 @@ import HobbiesSection from './HobbiesSection';
 import ReferenceSection from './ReferenceSection';
 import { PersonalFormData, EducationFormData, ExperienceFormData, Certificate, ReferenceFormData } from '../data/types';
 
-export type TemplateKey = 'template1' | 'template2';
+export type TemplateKey = 'template1' | 'template2' | 'template3';
 
 interface CVPreviewProps {
   personalFormData: PersonalFormData;
@@ -49,8 +49,8 @@ export const handleGeneratePDF = async (cvPreviewRef: React.RefObject<HTMLDivEle
       const element = cvPreviewRef.current;
       const opt = {
         filename: 'cv.pdf',
-        image: { type: 'png', quality: 1 },
-        html2canvas: { scale: 1, removeContainer: true },
+        image: { type: 'jpeg', quality: 1.0 },
+        html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       };
 
@@ -82,11 +82,27 @@ const CVPreview: React.FC<CVPreviewProps> = ({
 
   const setTemplateStyles = (template: TemplateKey) => {
     const root = document.documentElement;
-    const [primaryColor, secondaryColor] =
-      template === 'template1' ? ['#ffffff', '#000000'] : ['#000000', '#ffffff'];
-
+    let primaryColor: string = '';
+    let secondaryColor: string = '';
+    let fontFamily: string = '';
+  
+    if (template === 'template1') {
+      primaryColor = '#ffffff';
+      secondaryColor = '#000000';
+      fontFamily = 'inherit';
+    } else if (template === 'template2') {
+      primaryColor = '#ffffff';
+      secondaryColor = '#007bff';
+      fontFamily = 'Arial, sans-serif';
+    } else if (template === 'template3') {
+      primaryColor = '#ffffff';
+      secondaryColor = '#fa4343';
+      fontFamily = 'Verdana, sans-serif';
+    }
+  
     root.style.setProperty('--cv-preview-primary-color', primaryColor);
     root.style.setProperty('--cv-preview-secondary-color', secondaryColor);
+    root.style.setProperty('--cv-preview-font-family', fontFamily);
   };
 
   return (

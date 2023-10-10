@@ -1,13 +1,10 @@
-.ant-card-body {
-    background-color: var(--cv-preview-primary-color);
-}
-
 .CVPreview-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--cv-preview-primary-color);
     color: var(--cv-preview-secondary-color);
+    font-family: var(--cv-preview-font-family);
 }
 
 .CVPreview-columns {

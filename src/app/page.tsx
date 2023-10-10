@@ -98,7 +98,8 @@ const Page: React.FC = () => {
               aria-label="Select Template"
             >
               <option value="template1">Light</option>
-              <option value="template2">Dark</option>
+              <option value="template2">Blue</option>
+              <option value="template3">Red</option>
             </select>
           </div>
           <div className="mb-4">
